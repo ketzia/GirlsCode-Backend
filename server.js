@@ -2,8 +2,10 @@ const  express = require('express');
 const app = express();
 //Sirve para reconocer lo que viene en el cuerpo (req.body)
 const bodyParser = require('body-parser');
+require('dotenv').config();
 
-const port = process.env.PORT | 8081;
+
+const port = process.env.PORT;
 app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.listen(port);

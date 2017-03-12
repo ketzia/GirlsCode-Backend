@@ -56,7 +56,7 @@ UserSchema.methods.generateJWT = function(){
         country : this.country,
         birthday : this.birthday,
         educationLevel : this.educationLevel
-    }, "password"
+    }, process.env.JWT_SECRET
     );
     return token;
 }
