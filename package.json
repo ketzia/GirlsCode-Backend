@@ -1,0 +1,26 @@
+{
+  "name": "GirlsCode-Backend",
+  "version": "1.0.0",
+  "description": "This is the backend for GirlsCode",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ketzia/GirlsCode-Backend.git"
+  },
+  "keywords": [],
+  "author": "Ketzia Dante, Ernesto Pérez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ketzia/GirlsCode-Backend/issues"
+  },
+  "homepage": "https://github.com/ketzia/GirlsCode-Backend#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "jsonwebtoken": "^7.3.0",
+    "mongoose": "^4.8.6"
+  }
+}
