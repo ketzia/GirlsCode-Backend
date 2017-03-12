@@ -8,8 +8,12 @@ require('dotenv').config();
 const port = process.env.PORT;
 app.use(bodyParser.json());
 app.use(bodyParser.text());
-app.listen(port);
-console.log("Running at port"+ port);
+app.listen(port,
+    function(){
+        console.log("Running at port "+ port);
+    }
+);
+
 /* Ejemplo para ver como funciona el bodyparser
 app.post('/',function(req,res){
     console.log(req.body)
