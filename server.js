@@ -1,4 +1,5 @@
 const  express = require('express');
+// Express is instantiated
 const app = express();
 //Sirve para reconocer lo que viene en el cuerpo (req.body)
 const bodyParser = require('body-parser');
