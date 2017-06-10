@@ -44,6 +44,8 @@ const UserSchema = new Schema(
     }
 );
 
+
+
 UserSchema.methods.generateJWT = function(){
     const expiry = new Date();
     expiry.setDate(expiry.getDate()+7);
@@ -59,4 +61,6 @@ UserSchema.methods.generateJWT = function(){
     }, process.env.JWT_SECRET
     );
     return token;
-}
+};
+
+module.exports = mongoose.model('User',UserSchema);
