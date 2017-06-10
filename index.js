@@ -2,7 +2,7 @@
 
 
 
-var apiRoutes = function(app){
+const apiRoutes = function(app){
 
 };
 
