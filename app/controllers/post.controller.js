@@ -7,6 +7,12 @@ exports.getPostByUser = function(req, res){
 };
 
 exports.getPosts = function(req,res){
+    Post.find({}, function(err, posts){
+        if(err){
+            return res.status(500).send({err:err});
+        }
+        res.send(posts);
+    });
 };
 
 exports.createPost = function(req,res){
