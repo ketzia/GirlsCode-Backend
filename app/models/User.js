@@ -24,8 +24,7 @@ const UserSchema = new Schema(
             unique : true
         },
         country :{
-            type : Schema.Types.ObjectId,
-            ref : 'Country',
+            type : String,
             required : true
         },
         birthday :{
@@ -39,8 +38,11 @@ const UserSchema = new Schema(
         },
         hash : String,
         salt : String,
-        timestamps : true
 
+
+    },
+    {
+        timestamps : true
     }
 );
 

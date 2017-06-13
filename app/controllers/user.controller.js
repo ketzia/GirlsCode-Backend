@@ -1,5 +1,5 @@
-var jwt = require('jsonwebtoken');
-var User = require('../models/User');
+let jwt = require('jsonwebtoken');
+let User = require('../models/User');
 
 exports.getUsers = function(req, res){
     User.find({}, function(err,users){
@@ -33,7 +33,7 @@ exports.createUser = function(req, res){
     if(!req.body.educationLevel){
         return res.status(400).send({err: "Education Level is Missing"});
     }
-    const user = new User();
+    let user = new User();
     user.firstname = req.body.firstname;
     user.lastname = req.body.lastname;
     user.username = req.body.username;

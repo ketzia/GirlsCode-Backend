@@ -1,7 +1,7 @@
-var Post = require('../models/Post');
-var mongoose = require('mongoose');
-var isValid =require('mongoose').Types.ObjectId.isValid;
-var ObjectId = mongoose.Types.ObjectId;
+let Post = require('../models/Post');
+let mongoose = require('mongoose');
+let isValid =require('mongoose').Types.ObjectId.isValid;
+let ObjectId = mongoose.Types.ObjectId;
 
 exports.getPostByUser = function(req, res){
 };
@@ -29,7 +29,7 @@ exports.createPost = function(req,res){
 
     // Then, it is needed to instantiate the class we're referring to, and assign each corresponding field from the body
     // to the object
-    const post = new Post();
+    let post = new Post();
     post.body = req.body.body;
     post.title = req.body.title;
     post.user_id = req.body.user_id;
