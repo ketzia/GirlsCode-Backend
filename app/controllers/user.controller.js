@@ -71,6 +71,55 @@ exports.getUser = function(req, res){
     });
 };
 
+exports.deleteUser = function(req,res) {
+    if(!isValid(req.params._id)){
+        return res.status(400).send({err:"User id is not valid"});
+    }
+
+    User.findById(req.params._id,function(err,user){
+        if(err){
+            return res.status(500).send({err:err});
+        }
+        if(!user){
+            return res.status(400).send({err:"Couldn't find user"});
+        }
+
+        user.remove(function(err){
+           if(err) {
+               return res.status(500).send({err:err});
+           }
+           return res.status(200).send({msg: "user deleted successfully"});
+        });
+    });
+};
+
+exports.editUser = function(req,res){
+  if(!isValid(req.body._id)){
+      return res.status(400).send({err:"User id is not valid"});
+  }
+  User.findById(req.body._id,function(err,user){
+      if(err){
+          return res.status(500).send({err:err});
+      }
+      if(!user){
+          return res.status(400).send({msg:"Couldn't find user"});
+      }
+      user.firstname = req.body.firstname;
+      user.lastname= req.body.lastname;
+      user.country = req.body.country;
+      user.educationLevel = req.body.educationLevel;
+      user.email = req.body.email;
+
+      user.save(function(err){
+          if(err){
+              return res.status(500).send({err:err});
+          }
+          return res.status(200).send({msg: "User updated succesfully"});
+      });
+
+  });
+};
+
 exports.loginUser = function(req,res){
 
 };

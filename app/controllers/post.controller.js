@@ -78,3 +78,27 @@ exports.createPost = function(req,res){
     });
 
 };
+
+exports.editPost = function(req,res){
+  if(!isValid(req.body._id)){
+      return res.status(400).send({err:"Post id is not valid"});
+  }
+
+  Post.findById(req.body._id,function(err,post){
+     if(err){
+         return res.status(500).send({err:err});
+     }
+     if(!post){
+         return res.status(400).send({msg:"Couldn't find post"});
+     }
+
+     post.body = req.body.body;
+      post.save(function(err){
+         if(err){
+             return res.status(500).send({err:err});
+         }
+          return res.status(200).send({msg: "Post updated succesfully"});
+      });
+  });
+
+};

@@ -12,4 +12,7 @@ router.route('/posts/:user_id')
 router.route('/posts/:_id/user/:user_id')
     .delete(PostController.deletePost);
 
+router.route('/post')
+    .put(PostController.editPost);
+
 module.exports = router;
