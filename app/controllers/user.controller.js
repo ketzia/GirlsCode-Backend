@@ -1,5 +1,8 @@
 let jwt = require('jsonwebtoken');
 let User = require('../models/User');
+let mongoose = require('mongoose');
+let isValid =require('mongoose').Types.ObjectId.isValid;
+let ObjectId = mongoose.Types.ObjectId;
 
 exports.getUsers = function(req, res){
     User.find({}, function(err,users){
@@ -30,6 +33,9 @@ exports.createUser = function(req, res){
     if(!req.body.birthday){
         return res.status(400).send({err: "Birthday is Missing"});
     }
+    if(!req.body.email){
+        return res.status(400).send({err: "Email is Missing"});
+    }
     if(!req.body.educationLevel){
         return res.status(400).send({err: "Education Level is Missing"});
     }
@@ -38,6 +44,7 @@ exports.createUser = function(req, res){
     user.lastname = req.body.lastname;
     user.username = req.body.username;
     user.country = req.body.country;
+    user.email = req.body.email;
     user.birthday = req.body.birthday;
     user.educationLevel = req.body.educationLevel;
 
@@ -50,7 +57,18 @@ exports.createUser = function(req, res){
 };
 
 exports.getUser = function(req, res){
-
+    if(!isValid(req.params._id)){
+        return res.status(400).send({err:"User is not valid"});
+    }
+    User.findById(req.params._id,function(err,user){
+        if(err){
+            return res.status(500).send({err:err});
+        }
+        if(!user){
+            return res.status(400).send({err: "Couldn't find user"});
+        }
+        return res.status(200).send(user);
+    });
 };
 
 exports.loginUser = function(req,res){

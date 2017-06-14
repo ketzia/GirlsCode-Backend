@@ -4,6 +4,17 @@ let isValid =require('mongoose').Types.ObjectId.isValid;
 let ObjectId = mongoose.Types.ObjectId;
 
 exports.getPostByUser = function(req, res){
+    if(!isValid(req.params.user_id)){
+        return res.status(400).send({err:" Valid User_id is needed"});
+    }
+
+    Post.find({user_id : req.params.user_id}, function(err,posts){
+        if(err){
+           return  res.status(500).send({err:"Cannot find user"});
+        }
+        return res.status(200).send(posts);
+    });
+
 };
 
 exports.getPosts = function(req,res){
@@ -15,6 +26,31 @@ exports.getPosts = function(req,res){
     });
 };
 
+exports.deletePost = function(req,res){
+    if(!isValid(req.params.user_id)){
+        return res.status(500).send({err:"A valid user id is needed"});
+    }
+    if(!isValid(req.params._id)){
+        return res.status(500).send({err:"A valid post id is needed"});
+    }
+
+    Post.findById(req.params._id,function(err,post){
+        if(err){
+            return res.status(500).send({err:err});
+        }
+        if(!post){
+            return res.status(400).send({err: "Coudln't find post"});
+        }
+
+        post.remove(function(err){
+            if(err){
+                return res.status(500).send({err:err});
+            }
+            return res.status(200).send({msg: 'Post removed'});
+        });
+    });
+};
+
 exports.createPost = function(req,res){
     //We need to get all fields from the body from our model
     if(!req.body.body){
@@ -23,8 +59,8 @@ exports.createPost = function(req,res){
     if(!req.body.title){
         return res.status(400).send({err:"Title is needed"});
     }
-    if(!req.body.user_id){
-        return res.status(400).send({err:"User_id is needed"});
+    if(!isValid(req.body.user_id)){
+        return res.status(400).send({err:" Valid User_id is needed"});
     }
 
     // Then, it is needed to instantiate the class we're referring to, and assign each corresponding field from the body
