@@ -100,5 +100,19 @@ exports.editPost = function(req,res){
           return res.status(200).send({msg: "Post updated succesfully"});
       });
   });
+exports.getPost = function(req, res){
+    if(!isValid(req.params._id)){
+        return res.status(500).send({err:"Id is not valid"});
+    }
 
+    Posts.findById(req.params._id,function(err,post){
+        if(err){
+            return res.status(500).send({err:err});
+        }
+        if(!post){
+            return res.status(400).send({err: "Coudln't find post"});
+        }
+        return res.send(post);
+    });
+};
 };
