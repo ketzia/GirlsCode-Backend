@@ -22,7 +22,7 @@ exports.getPosts = function(req,res){
         if(err){
             return res.status(500).send({err:err});
         }
-        res.send(posts);
+        return res.send(posts);
     });
 };
 
@@ -79,40 +79,43 @@ exports.createPost = function(req,res){
 
 };
 
-exports.editPost = function(req,res){
-  if(!isValid(req.body._id)){
-      return res.status(400).send({err:"Post id is not valid"});
-  }
-
-  Post.findById(req.body._id,function(err,post){
-     if(err){
-         return res.status(500).send({err:err});
-     }
-     if(!post){
-         return res.status(400).send({msg:"Couldn't find post"});
-     }
-
-     post.body = req.body.body;
-      post.save(function(err){
-         if(err){
-             return res.status(500).send({err:err});
-         }
-          return res.status(200).send({msg: "Post updated succesfully"});
-      });
-  });
-exports.getPost = function(req, res){
-    if(!isValid(req.params._id)){
-        return res.status(500).send({err:"Id is not valid"});
+exports.editPost = function(req,res) {
+    if (!isValid(req.body._id)) {
+        return res.status(400).send({err: "Post id is not valid"});
     }
 
+    Post.findById(req.body._id, function (err, post) {
+        if (err) {
+            return res.status(500).send({err: err});
+        }
+        if (!post) {
+            return res.status(400).send({msg: "Couldn't find post"});
+        }
+
+        post.body = req.body.body;
+        post.save(function (err) {
+            if (err) {
+                return res.status(500).send({err: err});
+            }
+            return res.status(200).send({msg: "Post updated succesfully"});
+        });
+    });
+};
+
+
+exports.getPost = function(req, res){
+    if(!isValid(req.params._id)){
+        return res.status(400).send({err:"Post is not valid"});
+    }
     Post.findById(req.params._id,function(err,post){
         if(err){
             return res.status(500).send({err:err});
         }
         if(!post){
-            return res.status(400).send({err: "Coudln't find post"});
+            return res.status(400).send({err: "Couldn't find post"});
         }
-        return res.send(post);
+        return res.status(200).send(post);
     });
 };
-};
+
+
