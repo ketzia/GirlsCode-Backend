@@ -105,7 +105,7 @@ exports.getPost = function(req, res){
         return res.status(500).send({err:"Id is not valid"});
     }
 
-    Posts.findById(req.params._id,function(err,post){
+    Post.findById(req.params._id,function(err,post){
         if(err){
             return res.status(500).send({err:err});
         }
