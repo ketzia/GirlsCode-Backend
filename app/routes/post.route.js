@@ -13,8 +13,9 @@ router.route('/posts/:_id/user/:user_id')
     .delete(PostController.deletePost);
 
 router.route('/post')
-    .put(PostController.editPost)
-    .get(PostController.getPost);
+    .put(PostController.editPost);
 
+router.route('/post/:_id')
+    .get(PostController.getPost);
 
 module.exports = router;
