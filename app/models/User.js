@@ -23,14 +23,11 @@ const UserSchema = new Schema(
             required: true,
             unique : true
         },
-        country :{
-            type : String,
-            required : true
-        },
-        birthday :{
-            type : Date,
-            required : true
-        },
+      //  country :{
+        //    type : String,
+          //  required : true
+        //},
+
         educationLevel : {
             type: String,
             enum: ['HighSchool', 'MiddleSchool', 'Bachelor\'s', 'Master\'s', 'PhD'],

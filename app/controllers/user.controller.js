@@ -27,12 +27,12 @@ exports.createUser = function(req, res){
     if(!req.body.username){
         return res.status(400).send({err: "User Name is Missing"});
     }
-    if(!req.body.country){
-        return res.status(400).send({err: "Country is Missing"});
-    }
-    if(!req.body.birthday){
-        return res.status(400).send({err: "Birthday is Missing"});
-    }
+   // if(!req.body.country){
+     //   return res.status(400).send({err: "Country is Missing"});
+    //}
+   // if(!req.body.birthday){
+     //   return res.status(400).send({err: "Birthday is Missing"});
+    //}
     if(!req.body.email){
         return res.status(400).send({err: "Email is Missing"});
     }
@@ -43,9 +43,9 @@ exports.createUser = function(req, res){
     user.firstname = req.body.firstname;
     user.lastname = req.body.lastname;
     user.username = req.body.username;
-    user.country = req.body.country;
+   // user.country = req.body.country;
     user.email = req.body.email;
-    user.birthday = req.body.birthday;
+   // user.birthday = req.body.birthday;
     user.educationLevel = req.body.educationLevel;
 
     user.save(function(err){
