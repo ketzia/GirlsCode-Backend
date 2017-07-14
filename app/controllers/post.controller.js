@@ -59,16 +59,16 @@ exports.createPost = function(req,res){
     if(!req.body.title){
         return res.status(400).send({err:"Title is needed"});
     }
-    if(!isValid(req.body.user_id)){
-        return res.status(400).send({err:" Valid User_id is needed"});
-    }
+    //if(!isValid(req.body.user_id)){
+      //  return res.status(400).send({err:" Valid User_id is needed"});
+    //}
 
     // Then, it is needed to instantiate the class we're referring to, and assign each corresponding field from the body
     // to the object
     let post = new Post();
     post.body = req.body.body;
     post.title = req.body.title;
-    post.user_id = req.body.user_id;
+   // post.user_id = req.body.user_id;
 
     post.save(function(err){
         if(err){
